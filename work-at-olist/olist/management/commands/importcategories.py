@@ -29,7 +29,7 @@ class Command(BaseCommand):
         file = open(filename, 'r').readlines()
         
         for row in file:
-            categories = row.split('/')
+            categories = row.split('//')
             depth = len(categories) - 1
             parent_id = None
 

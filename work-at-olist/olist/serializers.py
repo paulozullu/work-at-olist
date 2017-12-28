@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from workatolist.models import Category
+from olist.models import Category
 from rest_framework import serializers
 
 

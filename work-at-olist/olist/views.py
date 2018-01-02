@@ -2,6 +2,9 @@
 from olist.models import Category, Channel
 from rest_framework import viewsets 
 from olist.serializers import CategorySerializer, ChannelSerializer
+from rest_framework.response import Response
+from rest_framework.decorators import list_route
+from rest_framework.generics import RetrieveAPIView
 
 
 class CategoryViewSet(viewsets.ModelViewSet):
@@ -19,4 +22,4 @@ class ChannelViewSet(viewsets.ModelViewSet):
     queryset = Channel.objects.all().order_by('-name')
     serializer_class = ChannelSerializer
 
-    
+

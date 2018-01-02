@@ -7,8 +7,14 @@ class Category(models.Model):
     Categories and subcategories. Uses adjacency model.
     """
     name = models.CharField(max_length=50,blank=True,null=False)
-    parent_id = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)
-    channel_id = models.ForeignKey('Channel', on_delete=models.CASCADE, null=False, blank=False)
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)
+    channel = models.ForeignKey('Channel', related_name='categories', on_delete=models.CASCADE, null=False, blank=False)
+
+    def get_parent(self):
+        return self.name + ' is subcategory of ' + self.parent.name + '.'
+
+    def get_channel(self):
+        return self.name + ' belongs to ' + self.channel.name + ' channel.'
 
     class Meta:
         db_table = 'category'

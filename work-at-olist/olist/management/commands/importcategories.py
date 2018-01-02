@@ -31,9 +31,9 @@ class Command(BaseCommand):
         
         for row in file:
             categories = row.strip().split('/')
-            parent_id = None
+            parent = None
 
             for category in categories:
-                category_obj, created = Category.objects.get_or_create(name=category.strip(), channel_id=channel, parent_id=parent_id)
-                parent_id = category_obj
+                category_obj, created = Category.objects.get_or_create(name=category.strip(), channel=channel, parent=parent)
+                parent = category_obj
         

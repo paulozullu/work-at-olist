@@ -10,16 +10,16 @@ class CategorySerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Category
-        fields = ('name', 'parent_id')
+        fields = ('name', 'parent', 'channel',)
 
 
 class ChannelSerializer(serializers.HyperlinkedModelSerializer):
     """
     Serialize Channel model.
     """
-
+    categories = CategorySerializer(many=True, read_only=True)
     class Meta:
         model = Channel
-        fields = ('name',)
+        fields = ('name', 'categories')
 
         

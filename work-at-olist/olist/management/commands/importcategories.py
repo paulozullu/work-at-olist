@@ -25,7 +25,7 @@ class Command(BaseCommand):
                 filename (str): Path to the file containing the categories to be imported.
         """
         
-        channel, created = Channel.objects.get_or_create(name=channel_name)
+        channel, _ = Channel.objects.get_or_create(name=channel_name)
         
         file = open(filename, 'r').readlines()
         
@@ -33,7 +33,7 @@ class Command(BaseCommand):
             categories = row.strip().split('/')
             parent_id = None
 
-            for x in categories:
-                category, created = Category.objects.get_or_create(name=x.strip(), channel_id=channel, parent_id=parent_id)
-                parent_id = category
+            for category in categories:
+                category_obj, created = Category.objects.get_or_create(name=category.strip(), channel_id=channel, parent_id=parent_id)
+                parent_id = category_obj
         

@@ -13,6 +13,7 @@ class Command(BaseCommand):
         if len(options['arguments']) == 2:
             channel_name = options['arguments'][0]
             filename = options['arguments'][1]
+            self.import_categories(channel_name, filename)
     
 
     def import_categories(self, channel_name, filename):
@@ -29,15 +30,10 @@ class Command(BaseCommand):
         file = open(filename, 'r').readlines()
         
         for row in file:
-            categories = row.split('//')
-            depth = len(categories) - 1
+            categories = row.strip().split('/')
             parent_id = None
 
-            for x in range(0, depth):
-                category, created = Category.objects.get_or_create(name=category[x].trim(), channel_id=result.id, parent_id=parent_id)
-                parent_id = category.id
-
-
-               
-
-
+            for x in categories:
+                category, created = Category.objects.get_or_create(name=x.strip(), channel_id=channel, parent_id=parent_id)
+                parent_id = category
+        

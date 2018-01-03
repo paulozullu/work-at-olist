@@ -7,7 +7,7 @@ class Category(models.Model):
     Categories and subcategories. Uses adjacency model.
     """
     name = models.CharField(max_length=50,blank=True,null=False)
-    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='sub_categories')
     channel = models.ForeignKey('Channel', related_name='categories', on_delete=models.CASCADE, null=False, blank=False)
 
     def get_parent(self):
